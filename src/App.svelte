@@ -19,6 +19,10 @@
     background-color: white;
   }
 
+  small {
+    font-weight: lighter;
+  }
+
   // @media (prefers-color-scheme: dark) {
   //   html {
   //     filter: invert(100%);
@@ -28,7 +32,7 @@
   .header {
     background-color: $color-tertiary;
     padding-top: 5rem;
-    margin-bottom: -5rem;
+    height: 100vh;
 
     & + section {
       border-top: 0;

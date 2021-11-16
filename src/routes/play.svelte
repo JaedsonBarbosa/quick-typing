@@ -3,63 +3,68 @@
   import { get } from 'svelte/store'
   import { letters, customText } from '../settings'
   import { loremIpsum } from 'lorem-ipsum'
+  import { goto } from '@roxi/routify'
+  import { cubicInOut } from 'svelte/easing'
+  import { flip } from 'svelte/animate'
+  import { slide } from 'svelte/transition'
 
-  const text = get(customText) || loremIpsum({ count: 1, units: 'paragraphs' })
+  function generateText() {
+    return loremIpsum({ count: 1, units: 'sentence' })
+  }
+
+  function includes(letters: string, letter: string) {
+    const clean = letter.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    return letters.includes(letter) || letters.includes(clean)
+  }
+
   const Letters_groups = get(letters)
     .split(' ')
     .map((v) => v.toUpperCase() + v.toLowerCase())
-    .map((v) => v.split(''))
-  const columns_data = text.split('')
+
+  const columns_data = (get(customText) || generateText())
+    .split('')
+    .filter((v) => v === ' ' || Letters_groups.some((k) => includes(k, v)))
 
   let index = 0
 
-  function clean(text: string) {
-    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  }
-
   function keydown(e: KeyboardEvent & { currentTarget: EventTarget & Window }) {
-    if (e.key == text[index]) {
+    console.log(e.key, index, columns_data[index])
+    if (e.key == columns_data[index]) {
       index += 1
-      if (index === text.length) {
-        game_over()
+      if (index === columns_data.length) {
+        $goto('/result')
       }
     }
   }
 
-  function game_over() {
-    alert()
-  }
+  const _colors = ['blue-ncs', 'cg-blue', 'ming', 'laurel-green']
+  const colors = _colors.concat(_colors.slice().reverse())
+  $: rendered_text = columns_data
+    .slice(index, index + 10)
+    .map((v, i) => ({ v, i: i + index }))
 </script>
 
 <svelte:window on:keydown={keydown} />
 
-<main>
+<main class="container">
   {#each Letters_groups as letters, i}
-    <div class="letters-column">
+    <div class="letters-column {colors[i]}">
       <div class="letters">
-        {#each columns_data as letter, j}
-          {#if j >= index}
-            {#if letters.includes(letter) || letters.includes(clean(letter))}
-              <div
-                class="letter"
-                class:blue-ncs={i === 0 || i === 7}
-                class:cg-blue={i === 1 || i === 6}
-                class:ming={i === 2 || i === 5}
-                class:laurel-green={i === 3 || i === 4}
-              >
-                {letter}
-              </div>
-            {:else}
-              <div class="space" />
-            {/if}
-          {/if}
+        {#each rendered_text as letter (letter.i)}
+          <div
+            transition:slide
+            animate:flip={{ duration: 200, easing: cubicInOut }}
+            class={includes(letters, letter.v)
+              ? `letter ${colors[i]}`
+              : 'space'}
+          >
+            {letter.v}
+          </div>
         {/each}
       </div>
     </div>
   {/each}
 </main>
-
-
 
 <style lang="scss">
   // https://coolors.co/2589bd-187795-38686a-a3b4a2-cdc6ae
@@ -68,7 +73,9 @@
   $ming: #38686aff;
   $laurel-green: #a3b4a2ff;
   $bone: #cdc6aeff;
-  $letter-height: 4rem;
+  $letter-height: 6rem;
+  $letter-gap: $letter-height * 0.5;
+  $column-opacity: 0.4;
 
   main {
     height: 100vh;
@@ -77,11 +84,25 @@
   .letters-column {
     height: 100%;
     overflow-y: hidden;
-    width: 10%;
-    margin-left: 1.25%;
-    margin-right: 1.25%;
+    width: 12.5%;
     position: relative;
     display: inline-block;
+
+    &.blue-ncs {
+      background-color: rgba($blue-ncs, $column-opacity);
+    }
+
+    &.cg-blue {
+      background-color: rgba($cg-blue, $column-opacity);
+    }
+
+    &.ming {
+      background-color: rgba($ming, $column-opacity);
+    }
+
+    &.laurel-green {
+      background-color: rgba($laurel-green, $column-opacity);
+    }
 
     .letters {
       display: flex;
@@ -100,7 +121,7 @@
         height: $letter-height;
         border-radius: $letter-height * 0.5;
         text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-        margin-top: 1rem;
+        margin-bottom: $letter-gap;
 
         &.blue-ncs {
           background-color: $blue-ncs;
@@ -121,7 +142,8 @@
 
       .space {
         height: $letter-height;
-        margin-top: 1rem;
+        margin-bottom: $letter-gap;
+        visibility: hidden;
       }
     }
   }
