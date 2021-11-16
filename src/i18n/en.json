@@ -17,5 +17,6 @@
   "errors": "Errors",
   "precision": "Precision",
   "back": "Come back",
-  "time-unit": "seconds"
+  "time-unit": "seconds",
+  "total": "Total entered"
 }

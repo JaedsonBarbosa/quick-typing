@@ -9,7 +9,7 @@
   import { slide } from 'svelte/transition'
 
   function generateText() {
-    return loremIpsum({ count: 1, units: 'sentence' })
+    return loremIpsum({ count: 5, units: 'sentence' })
   }
 
   function includes(letters: string, letter: string) {
@@ -21,7 +21,7 @@
     .split(' ')
     .map((v) => v.toUpperCase() + v.toLowerCase())
 
-  const columns_data = (get(customText) || generateText())
+  const text = (get(customText) || generateText())
     .split('')
     .filter((v) => v === ' ' || Letters_groups.some((k) => includes(k, v)))
 
@@ -30,28 +30,24 @@
   let errors = 0
 
   function keydown(e: KeyboardEvent & { currentTarget: EventTarget & Window }) {
-    console.log(e.key, index, columns_data[index])
-    if (e.key == columns_data[index]) {
-      if (!start) {
-        start = new Date().valueOf()
-      }
+    console.log(e.key, index, text[index])
+    if (e.key == text[index]) {
       index += 1
-      if (index === columns_data.length) {
-        finish()
-      }
-    }
+      if (!start) start = new Date().valueOf()
+      if (index === text.length) finish()
+    } else errors++
   }
 
   function finish() {
     const end = new Date().valueOf()
     const duration = Math.floor((end - start) / 1000)
-    $statistics = { duration, errors, length: columns_data.length }
+    $statistics = { duration, errors, length: text.length }
     $goto('/result')
   }
 
   const _colors = ['blue-ncs', 'cg-blue', 'ming', 'laurel-green']
   const colors = _colors.concat(_colors.slice().reverse())
-  $: rendered_text = columns_data
+  $: rendered_text = text
     .slice(index, index + 10)
     .map((v, i) => ({ v, i: i + index }))
 </script>

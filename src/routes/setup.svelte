@@ -30,4 +30,8 @@
     margin-top: 7.5rem;
     margin-bottom: 7.5rem;
   }
+
+  small {
+    font-weight: lighter;
+  }
 </style>

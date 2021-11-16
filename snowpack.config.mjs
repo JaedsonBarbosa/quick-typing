@@ -1,7 +1,7 @@
 export default {
   mount: {
     public: { url: '/', static: true },
-    src: { url: '/build' },
+    src: { url: '/dist' },
     '.routify': { url: '/.routify' },
   },
   packageOptions: {

@@ -17,5 +17,6 @@
   "errors": "Erros",
   "precision": "Precisão",
   "back": "Voltar",
-  "time-unit": "segundos"
+  "time-unit": "segundos",
+  "total": "Total digitado"
 }
