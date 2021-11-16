@@ -1,0 +1,20 @@
+{
+  "name": "Quick Typing",
+  "short_name": "QTyping",
+  "start_url": ".",
+  "categories": ["games", "bot", "typing", "keyboard"],
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white",
+  "description": "Correct and fast typing training.",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/favicon.png", "type": "image/png", "sizes": "16x16" },
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "600x600",
+      "purpose": "any maskable"
+    }
+  ]
+}

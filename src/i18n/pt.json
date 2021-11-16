@@ -1,0 +1,12 @@
+{
+  "version": "Versão",
+  "title": "Digitação rápida",
+  "start": "Iniciar",
+  "description": "Treinamento para digitação correta e eficiente.",
+  "letters": "Letras por dedo",
+  "letters-info": "Do dedo mindinho esquerdo ao dedo mindinho direito, separadas por espaço.",
+  "custom-text": "Texto personalizado",
+  "options": "Opções",
+  "personalize": "Personalizar",
+  "custom-text-info": "Mantenha o campo abaixo em branco caso queira que a aplicação gere um texto aleatório para você."
+}

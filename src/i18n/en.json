@@ -1,0 +1,12 @@
+{
+  "version": "Version",
+  "title": "Quick typing",
+  "start": "Start",
+  "description": "Training for correct and efficient typing.",
+  "letters": "Letters per finger",
+  "letters-info": "From left little finger to right little finger, separated by space.",
+  "custom-text": "Custom text",
+  "options": "Options",
+  "personalize": "Personalize",
+  "custom-text-info": "Keep the field below blank if you want the application to generate random text for you."
+}
