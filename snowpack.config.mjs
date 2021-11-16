@@ -1,7 +1,11 @@
 export default {
   mount: {
     public: { url: '/', static: true },
-    src: { url: '/dist' },
+    src: { url: '/build' },
+    '.routify': { url: '/.routify' },
+  },
+  packageOptions: {
+    knownEntrypoints: ['svelte'],
   },
   plugins: ['@snowpack/plugin-svelte'],
   optimize: {
@@ -11,5 +15,5 @@ export default {
   },
   env: {
     VERSION: process.env.npm_package_version,
-  }
+  },
 }

@@ -1,7 +1,9 @@
 {
   "version": "1.0.0",
   "scripts": {
+    "prestart": "npx @roxi/routify",
     "start": "snowpack dev",
+    "prebuild": "npx @roxi/routify --noDynamicImports",
     "build": "snowpack build",
     "postbuild": "workbox generateSW workbox-config.js",
     "prepublish": "npm run build",
@@ -14,6 +16,7 @@
     "svelte-i18n": "^3.3.13"
   },
   "devDependencies": {
+    "@roxi/routify": "^3.0.0-next.1",
     "@snowpack/plugin-svelte": "^3.7.0",
     "sass": "^1.43.4",
     "snowpack": "^3.8.8",

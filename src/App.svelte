@@ -1,20 +1,14 @@
-<script lang="ts">
+<script>
+  import { Router } from '@roxi/routify'
+  import routes from '../.routify/routes.default.js'
   import { _ } from 'svelte-i18n'
-  import Begin from './Begin.svelte'
-  import Play from './Play.svelte'
-
-  let play = false
 </script>
 
 <svelte:head>
   <title>{$_('title')}</title>
 </svelte:head>
 
-{#if play}
-  <Play />
-{:else}
-  <Begin on:submit={() => (play = true)} />
-{/if}
+<Router {routes} />
 
 <style global lang="scss">
   @import 'https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic';

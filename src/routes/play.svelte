@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import { get } from 'svelte/store'
-  import { letters, customText } from './settings'
+  import { letters, customText } from '../settings'
   import { loremIpsum } from 'lorem-ipsum'
 
   const text = get(customText) || loremIpsum({ count: 1, units: 'paragraphs' })

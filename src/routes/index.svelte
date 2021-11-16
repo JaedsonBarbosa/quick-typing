@@ -6,7 +6,7 @@
 
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { customText, letters } from './settings'
+  import { customText, letters } from '../settings'
 
   const lettersPattern = '([^ ]{1,}( |$)){8}'
 </script>
