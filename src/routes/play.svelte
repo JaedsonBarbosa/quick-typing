@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import { get } from 'svelte/store'
-  import { letters, customText } from '../settings'
+  import { letters, customText, statistics } from '../settings'
   import { loremIpsum } from 'lorem-ipsum'
   import { goto } from '@roxi/routify'
   import { cubicInOut } from 'svelte/easing'
@@ -25,16 +25,28 @@
     .split('')
     .filter((v) => v === ' ' || Letters_groups.some((k) => includes(k, v)))
 
+  let start: number
   let index = 0
+  let errors = 0
 
   function keydown(e: KeyboardEvent & { currentTarget: EventTarget & Window }) {
     console.log(e.key, index, columns_data[index])
     if (e.key == columns_data[index]) {
+      if (!start) {
+        start = new Date().valueOf()
+      }
       index += 1
       if (index === columns_data.length) {
-        $goto('/result')
+        finish()
       }
     }
+  }
+
+  function finish() {
+    const end = new Date().valueOf()
+    const duration = Math.floor((end - start) / 1000)
+    $statistics = { duration, errors, length: columns_data.length }
+    $goto('/result')
   }
 
   const _colors = ['blue-ncs', 'cg-blue', 'ming', 'laurel-green']

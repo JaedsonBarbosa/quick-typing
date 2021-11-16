@@ -8,5 +8,14 @@
   "custom-text": "Texto personalizado",
   "options": "Opções",
   "personalize": "Personalizar",
-  "custom-text-info": "Mantenha o campo abaixo em branco caso queira que a aplicação gere um texto aleatório para você."
+  "custom-text-info": "Mantenha o campo abaixo em branco caso queira que a aplicação gere um texto aleatório para você.",
+  "duration": "Tempo total",
+  "characters": "Caracteres",
+  "speed": "Velocidade",
+  "speed-unit": "Teclas por minuto",
+  "short-speed-unit": "TPM",
+  "errors": "Erros",
+  "precision": "Precisão",
+  "back": "Voltar",
+  "time-unit": "segundos"
 }

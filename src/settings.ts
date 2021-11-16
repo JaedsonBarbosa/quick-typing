@@ -6,3 +6,11 @@ export const letters = writable(_letters)
 letters.subscribe(v => localStorage.setItem('letters', v))
 
 export const customText = writable('')
+
+export const statistics = writable<Statistics>(undefined)
+
+interface Statistics {
+  duration: number
+  length: number
+  errors: number
+}

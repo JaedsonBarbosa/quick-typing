@@ -8,5 +8,14 @@
   "custom-text": "Custom text",
   "options": "Options",
   "personalize": "Personalize",
-  "custom-text-info": "Keep the field below blank if you want the application to generate random text for you."
+  "custom-text-info": "Keep the field below blank if you want the application to generate random text for you.",
+  "duration": "Total time",
+  "characters": "Characters",
+  "speed": "Speed",
+  "speed-unit": "Keys per minute",
+  "short-speed-unit": "KPM",
+  "errors": "Errors",
+  "precision": "Precision",
+  "back": "Come back",
+  "time-unit": "seconds"
 }
