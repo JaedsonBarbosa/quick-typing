@@ -9,7 +9,7 @@
   import { slide } from 'svelte/transition'
 
   function generateText() {
-    return loremIpsum({ count: 5, units: 'sentence' })
+    return loremIpsum({ count: 2, units: 'sentence' })
   }
 
   function includes(letters: string, letter: string) {
