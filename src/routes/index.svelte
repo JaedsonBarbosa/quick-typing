@@ -1,10 +1,6 @@
-<script context="module" lang="ts">
-  declare const __SNOWPACK_ENV__: any
-  const version = __SNOWPACK_ENV__.VERSION
-</script>
-
 <script lang="ts">
   import { _ } from 'svelte-i18n'
+  import { version } from '../settings'
 </script>
 
 <main class="container">
@@ -13,7 +9,7 @@
   <p class="description">
     {$_('description')}
     <br />
-    <i><small>{$_('version')} {version}</small></i>
+    <i><small>{$_('version')} {$version}</small></i>
   </p>
   <a class="button" href="/setup">{$_('personalize')}</a>
 </main>
