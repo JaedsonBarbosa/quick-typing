@@ -21,21 +21,24 @@
     .split(' ')
     .map((v) => v.toUpperCase() + v.toLowerCase())
 
+  function isValidLetter(letter: string) {
+    return letter === ' ' || Letters_groups.some((k) => includes(k, letter))
+  }
+
   const text = (get(customText) || generateText())
     .split('')
-    .filter((v) => v === ' ' || Letters_groups.some((k) => includes(k, v)))
+    .filter((v) => isValidLetter(v))
 
   let start: number
   let index = 0
   let errors = 0
 
   function keydown(e: KeyboardEvent & { currentTarget: EventTarget & Window }) {
-    console.log(e.key, index, text[index])
     if (e.key == text[index]) {
       index += 1
       if (!start) start = new Date().valueOf()
       if (index === text.length) finish()
-    } else errors++
+    } else if (isValidLetter(e.key)) errors++
   }
 
   function finish() {
