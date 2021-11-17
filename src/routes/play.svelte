@@ -7,12 +7,14 @@
   import { cubicInOut } from 'svelte/easing'
   import { flip } from 'svelte/animate'
   import { slide } from 'svelte/transition'
+  import { onMount } from 'svelte'
 
   function generateText() {
     return loremIpsum({ count: 2, units: 'sentence' })
   }
 
   function includes(letters: string, letter: string) {
+    if (!letter) return false
     const clean = letter.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     return letters.includes(letter) || letters.includes(clean)
   }
@@ -33,12 +35,21 @@
   let index = 0
   let errors = 0
 
-  function keydown(e: KeyboardEvent & { currentTarget: EventTarget & Window }) {
-    if (e.key == text[index]) {
+  function keydown(
+    e: Event & { currentTarget: EventTarget & HTMLInputElement }
+  ) {
+    const target = e.target as HTMLInputElement
+    const newText = target.value
+    if (newText[index] == text[index]) {
       index += 1
       if (!start) start = new Date().valueOf()
       if (index === text.length) finish()
-    } else if (isValidLetter(e.key)) errors++
+    } else if (isValidLetter(newText[index])) {
+      errors++
+      target.value = text.slice(0, index).join('')
+    } else if (newText.length < index) {
+      target.value = text.slice(0, index).join('')
+    }
   }
 
   function finish() {
@@ -51,30 +62,36 @@
   const _colors = ['blue-ncs', 'cg-blue', 'ming', 'laurel-green']
   const colors = _colors.concat(_colors.slice().reverse())
   $: rendered_text = text
-    .slice(index, index + 10)
+    .slice(index, index + 8)
     .map((v, i) => ({ v, i: i + index }))
+
+  let input: HTMLInputElement
+  onMount(() => input.focus())
 </script>
 
-<svelte:window on:keydown={keydown} />
-
 <main class="container">
-  {#each Letters_groups as letters, i}
-    <div class="letters-column {colors[i]}">
-      <div class="letters">
-        {#each rendered_text as letter (letter.i)}
-          <div
-            transition:slide
-            animate:flip={{ duration: 200, easing: cubicInOut }}
-            class={includes(letters, letter.v)
-              ? `letter ${colors[i]}`
-              : 'space'}
-          >
-            {letter.v}
-          </div>
-        {/each}
+  <section class="letters-section">
+    {#each Letters_groups as letters, i}
+      <div class="letters-column {colors[i]}">
+        <div class="letters">
+          {#each rendered_text as letter (letter.i)}
+            <div
+              transition:slide
+              animate:flip={{ duration: 200, easing: cubicInOut }}
+              class={includes(letters, letter.v)
+                ? `letter ${colors[i]}`
+                : 'space'}
+            >
+              {letter.v}
+            </div>
+          {/each}
+        </div>
       </div>
-    </div>
-  {/each}
+    {/each}
+  </section>
+  <section>
+    <input bind:this={input} on:input={keydown} />
+  </section>
 </main>
 
 <style lang="scss">
@@ -90,6 +107,10 @@
 
   main {
     height: 100vh;
+  }
+
+  .letters-section {
+    height: calc(100% - 5.3rem);
   }
 
   .letters-column {
