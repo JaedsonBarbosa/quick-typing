@@ -7,7 +7,6 @@
   "letters-info": "From left little finger to right little finger, separated by space.",
   "custom-text": "Custom text",
   "options": "Options",
-  "personalize": "Personalize",
   "custom-text-info": "Keep the field below blank if you want the application to generate random text for you.",
   "duration": "Total time",
   "characters": "Characters",
@@ -18,5 +17,6 @@
   "precision": "Precision",
   "back": "Come back",
   "time-unit": "seconds",
-  "total": "Total entered"
+  "total": "Total entered",
+  "play": "Play"
 }

@@ -11,7 +11,7 @@
     <br />
     <i><small>{$_('version')} {$version}</small></i>
   </p>
-  <a class="button" href="/setup">{$_('personalize')}</a>
+  <a class="button" href="/setup">{$_('play')}</a>
 </main>
 
 <style lang="scss">

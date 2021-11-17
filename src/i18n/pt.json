@@ -7,7 +7,6 @@
   "letters-info": "Do dedo mindinho esquerdo ao dedo mindinho direito, separadas por espaço.",
   "custom-text": "Texto personalizado",
   "options": "Opções",
-  "personalize": "Personalizar",
   "custom-text-info": "Mantenha o campo abaixo em branco caso queira que a aplicação gere um texto aleatório para você.",
   "duration": "Tempo total",
   "characters": "Caracteres",
@@ -18,5 +17,6 @@
   "precision": "Precisão",
   "back": "Voltar",
   "time-unit": "segundos",
-  "total": "Total digitado"
+  "total": "Total digitado",
+  "play": "Jogar"
 }
